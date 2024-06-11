@@ -1,17 +1,18 @@
 // mobile/src/screens/IncidentFeedScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Button, Picker  } from 'react-native';
 import incidentService from '../services/incidentService';
 
 const IncidentFeedScreen = ({ navigation }) => {
   const [incidents, setIncidents] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     fetchIncidents();
-  }, [incidents, ]);
+  }, [incidents, selectedCategory]);
 
   const fetchIncidents = () => {
-    incidentService.getIncidents()
+    incidentService.getIncidents(selectedCategory)
       .then(response => {
         setIncidents(response.data);
       })
@@ -31,6 +32,16 @@ const IncidentFeedScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button title="Report Incident" onPress={() => navigation.navigate('ReportIncident')} />
+      <Picker
+        selectedValue={selectedCategory}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+      >
+        <Picker.Item label="All" value="" />
+        <Picker.Item label="Accident" value="Accident" />
+        <Picker.Item label="Fighting" value="Fighting" />
+        <Picker.Item label="Rioting" value="Rioting" />
+      </Picker>
       <FlatList
         data={incidents}
         renderItem={renderItem}

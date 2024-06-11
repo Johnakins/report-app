@@ -7,7 +7,7 @@ const createIncident = (incidentData) => {
 };
 
 const getIncidents = (category) => {
-  const url = category ? `${BASE_URL}/incidents?category=${category}` : `${BASE_URL}/incidents`;
+  const url = category ? `${API_URL}/incidents?category=${category}` : `${API_URL}/incidents`;
   return axios.get(url);
 };
 

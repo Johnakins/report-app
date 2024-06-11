@@ -39,9 +39,9 @@ app.get('/incidents', async (req, res) => {
   try {
     let incidents;
     if (category) {
-      incidents = await Incident.find({ type: category }).sort({ createdAt: 1 });
+      incidents = await Incident.find({ type: category }).sort({ createdAt: -1 });
     } else {
-      incidents = await Incident.find().sort({ createdAt: 1 });
+      incidents = await Incident.find().sort({ createdAt: -1 });
     }
     res.status(200).json(incidents);
   } catch (error) {

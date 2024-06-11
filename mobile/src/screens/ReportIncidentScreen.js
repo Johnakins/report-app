@@ -1,6 +1,6 @@
 // mobile/src/screens/ReportIncidentScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, Picker  } from 'react-native';
 import incidentService from '../services/incidentService';
 
 const ReportIncidentScreen = ({ navigation }) => {
@@ -28,7 +28,16 @@ const ReportIncidentScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Incident Type</Text>
-      <TextInput style={styles.input} value={type} onChangeText={setType} placeholder="Accident, Fighting, etc." />
+      <Picker
+        selectedValue={type}
+        style={{ height: 50, width: '100%' }}
+        onValueChange={(itemValue) => setType(itemValue)}
+      >
+        <Picker.Item label="Select Type" value="" />
+        <Picker.Item label="Accident" value="Accident" />
+        <Picker.Item label="Fighting" value="Fighting" />
+        <Picker.Item label="Rioting" value="Rioting" />
+      </Picker>
 
       <Text style={styles.label}>Description</Text>
       <TextInput style={styles.input} value={description} onChangeText={setDescription} placeholder="Describe the incident" multiline />
