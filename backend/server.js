@@ -2,10 +2,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv').config()
+
 var cors = require('cors')
 var app = express()
 
-mongoose.connect('mongodb+srv://johnolawole1:UjIzloHoRTdtTRjx@cluster0.dnxdigs.mongodb.net/report-app?retryWrites=true&w=majority&appName=Cluster0').then(() => {
+mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to Mongodb')
 }).catch((err) => {
     console.log(err)
